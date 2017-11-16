@@ -1,0 +1,57 @@
+﻿@model  WebApplication3.Models.IndexViewModel
+
+<html>
+<head>
+    <title>Exemplo de paginação</title>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+
+            <h2>Paginação utilizando lógica do google</h2>
+
+            <!-- items para ser paginado -->
+            <ul>
+                @foreach (var item in Model.Items)
+                {
+                    <li>@item</li>
+                }
+            </ul>
+
+            <!-- paginação -->
+            @if (Model.Paginador.UltimaPagina > 1)
+            {
+                <ul class="pagination">
+                    @if (Model.Paginador.PaginaAtual > 1)
+                    {
+                       <li>
+                            @Html.ActionLink("Primeira", "Index")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Anterior", "Index", new { pagina = (Model.Paginador.PaginaAtual - 1) })
+                        </li>
+                    }
+
+                    @for (var pagina = Model.Paginador.PrimeiraPagina; pagina <= Model.Paginador.UltimaPagina; pagina++)
+                    {
+                        <li class="@(pagina == Model.Paginador.PaginaAtual ? "active" : "")">
+                            @Html.ActionLink(pagina.ToString(), "Index", new { pagina = @pagina })
+                        </li>
+                    }
+
+                    @if (Model.Paginador.PaginaAtual < Model.Paginador.TotalPaginas)
+                    {
+                        <li>
+                            @Html.ActionLink("Próximo", "Index", new { pagina = (Model.Paginador.PaginaAtual + 1) })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Última", "Index", new { pagina = (Model.Paginador.TotalPaginas) })
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    <hr />
+</body>
+</html>
