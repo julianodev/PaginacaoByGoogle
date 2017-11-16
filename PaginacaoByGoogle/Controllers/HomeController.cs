@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using WebApplication3.Models;
+using PaginacaoByGoogle.Models;
 
-namespace WebApplication3.Controllers
+namespace PaginacaoByGoogle.Controllers
 {
     public class HomeController : Controller
     {
@@ -12,11 +12,11 @@ namespace WebApplication3.Controllers
             //Gera uma quantidade X de items
             var items = Enumerable.Range(1, 150).Select(x => "Item " + x);
 
-            //Efetua a paginação dos itens
+            //Efetua a paginação dos items
             var paginador = new Paginador(items.Count(), pagina);
 
 
-            var viewModel = new IndexViewModel
+            var viewModel = new PaginadorViewModel
             {
                 Items = items.Skip((paginador.PaginaAtual - 1) * (paginador.ItemsPorPagina))
                 .Take(paginador.ItemsPorPagina),

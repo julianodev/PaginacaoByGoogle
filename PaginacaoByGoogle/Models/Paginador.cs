@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace WebApplication3.Models
+namespace PaginacaoByGoogle.Models
 {
-
-    public sealed class IndexViewModel
-    {
-        public IEnumerable<string> Items { get; set; }
-        public Paginador Paginador { get; set; }
-    }
-
     /// <summary>
     /// Efetua a Paginação dos items
     /// </summary>
@@ -29,7 +21,7 @@ namespace WebApplication3.Models
 
         private void EfetuaPaginacao(int qtdRegistros, int? pagina, int qtdPagina = 10)
         {
-            var totalPaginas = (int)Math.Ceiling((decimal) qtdRegistros / qtdPagina);
+            var totalPaginas = (int)Math.Ceiling((decimal)qtdRegistros / qtdPagina);
             var paginaAtual = pagina != null ? (int)pagina : 1;
             var primeiraPagina = paginaAtual - 5;
             var ultimaPagina = paginaAtual + 4;
